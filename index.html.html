@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ime Prezime – Fotografkinja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f0ea;--ink:#171614;--mute:#6f6a62;--line:#d8d2c8;--card:#ebe5db;
+--serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;--sans:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121110;--ink:#efeae2;--mute:#9a948a;--line:#2e2b27;--card:#1b1917;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121110;--ink:#efeae2;--mute:#9a948a;--line:#2e2b27;--card:#1b1917;color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:300 17px/1.7 var(--sans)}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--serif);font-weight:300;line-height:1.05;margin:0}
+.eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--mute)}
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:calc(18px + env(safe-area-inset-top,0px)) 4vw 18px;mix-blend-mode:difference;color:#fff}
+header .logo{font-family:var(--serif);font-size:24px;letter-spacing:.04em}
+nav{display:flex;gap:26px;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+nav a{opacity:.85}nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:6px}
+@media(max-width:760px){nav{gap:14px;font-size:10px;letter-spacing:.1em}nav a:nth-child(n+4){display:none}}
+/* placeholders */
+.ph{background:var(--g);position:relative}
+.ph::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.22),transparent 60%)}
+/* hero */
+.hero{position:relative;height:100svh;min-height:560px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--bg);padding:6px}
+.panel{position:relative;overflow:hidden}
+.panel .ph{position:absolute;inset:0;opacity:0;animation:fade 9s infinite}
+.panel:nth-child(2){margin-top:8vh;margin-bottom:-0vh}
+@keyframes fade{0%{opacity:0}8%{opacity:1}33%{opacity:1}41%{opacity:0}100%{opacity:0}}
+.hero-title{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 4vw 9vh;color:#fff;pointer-events:none;background:linear-gradient(transparent 40%,rgba(0,0,0,.55))}
+.hero-title h1{font-size:clamp(46px,9vw,140px);font-style:italic}
+.hero-title p{max-width:440px;margin:18px 0 0}
+.scroll-cue{position:absolute;right:4vw;bottom:9vh;color:#fff;font-size:12px;letter-spacing:.25em;writing-mode:vertical-rl}
+/* sections */
+section{padding:12vh 4vw}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:6vh;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(38px,6vw,84px)}
+.sec-head p{max-width:380px;color:var(--mute);margin:0}
+/* works - asymmetric */
+.works{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+.work{position:relative;overflow:hidden;display:block;color:#fff}
+.work .ph{position:absolute;inset:0;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.work:hover .ph{transform:scale(1.06)}
+.work span{position:absolute;left:22px;bottom:18px;z-index:2;font-family:var(--serif);font-size:clamp(26px,3.4vw,46px);font-style:italic}
+.work small{position:absolute;right:22px;top:18px;z-index:2;font-size:11px;letter-spacing:.25em;text-transform:uppercase}
+.w1{grid-column:1/8;aspect-ratio:4/3}.w2{grid-column:8/13;aspect-ratio:3/4;margin-top:10vh}
+.w3{grid-column:1/6;aspect-ratio:3/4}.w4{grid-column:6/13;aspect-ratio:16/10;margin-top:-6vh}
+@media(max-width:760px){.works>*{grid-column:1/-1!important;margin:0!important}}
+/* fixed parallax band */
+.band{height:80vh;display:grid;place-items:center;text-align:center;color:#fff;padding:0 6vw;
+background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),radial-gradient(circle at 70% 30%,#8d8a85,#2a2927 70%);background-attachment:fixed}
+.band h2{font-size:clamp(32px,5.5vw,76px);font-style:italic;max-width:900px}
+/* about - sticky */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:start}
+.about .sticky{position:sticky;top:90px;aspect-ratio:3/4;max-height:80vh;width:100%}
+.about h2{font-size:clamp(38px,5vw,72px);margin:14px 0 28px}
+.about p{margin:0 0 22px;color:var(--mute)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:40px 0;border-top:1px solid var(--line);padding-top:30px}
+.facts b{display:block;font:300 44px var(--serif);color:var(--ink)}
+.facts span{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+.btn{display:inline-block;border:1px solid var(--ink);padding:14px 30px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;transition:.3s}
+.btn:hover{background:var(--ink);color:var(--bg)}
+@media(max-width:760px){.about{grid-template-columns:1fr}.about .sticky{position:relative;top:0}}
+/* link cards */
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.links a{background:var(--bg);padding:38px 30px;display:flex;flex-direction:column;gap:14px;min-height:230px;justify-content:space-between;transition:background .3s}
+.links a:hover{background:var(--card)}
+.links h3{font-size:32px;font-style:italic}
+.links em{font-style:normal;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--mute)}
+/* gallery teaser */
+.teaser{position:relative;display:block;height:70vh;overflow:hidden;color:#fff}
+.teaser .ph{position:absolute;inset:0;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.teaser:hover .ph{transform:scale(1.05)}
+.teaser div{position:absolute;inset:0;z-index:2;display:grid;place-items:center;text-align:center;background:rgba(0,0,0,.28)}
+.teaser h2{font-size:clamp(44px,8vw,120px);font-style:italic}
+.teaser .btn{margin-top:26px;border-color:#fff}.teaser:hover .btn{background:#fff;color:#111}
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:6vw}
+.contact h2{font-size:clamp(40px,6vw,88px)}
+.contact ul{list-style:none;padding:0;margin:0}
+.contact li{padding:18px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px}
+@media(max-width:760px){.contact{grid-template-columns:1fr}}
+footer{padding:30px 4vw 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--mute);font-size:13px;border-top:1px solid var(--line)}
+/* reveal */
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1s,transform 1s}
+.rv.on{opacity:1;transform:none}
+/* gallery view */
+#gal{position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;display:none;padding:calc(30px + env(safe-area-inset-top,0px)) 4vw 60px}
+#gal.open{display:block;animation:in .5s}
+@keyframes in{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+.gtop{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:5vh}
+.gtop h2{font-size:clamp(38px,6vw,80px);font-style:italic}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters a{border:1px solid var(--line);padding:9px 18px;font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+.filters a.act,.filters a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{columns:3 260px;column-gap:14px}
+.grid .ph{break-inside:avoid;margin-bottom:14px;cursor:zoom-in;transition:opacity .3s}
+.grid .ph:hover{opacity:.85}
+#lb{position:fixed;inset:0;z-index:60;background:rgba(10,10,10,.94);display:none;place-items:center;color:#fff}
+#lb.open{display:grid}
+#lb .ph{width:min(86vw,900px);height:min(80vh,760px)}
+#lb button{position:absolute;background:none;border:0;color:#fff;font:300 40px var(--serif);cursor:pointer;padding:20px}
+#lb .x{top:10px;right:10px}#lb .p{left:6px}#lb .n{right:6px}
+@media(prefers-reduced-motion:reduce){.panel .ph{animation:none}.panel .ph:first-child{opacity:1}.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+/* menu gumb i slajd */
+.menu-btn{background:none;border:1px solid currentColor;color:inherit;font:inherit;font-size:12px;letter-spacing:.22em;text-transform:uppercase;padding:9px 18px;cursor:pointer;margin-left:26px}
+header{gap:10px}
+.hd-r{display:flex;align-items:center}
+#drawer{position:fixed;inset:0;z-index:70;visibility:hidden;transition:visibility 0s .6s}
+#drawer.open{visibility:visible;transition:none}
+#drawer .veil{position:absolute;inset:0;background:rgba(0,0,0,.5);opacity:0;transition:opacity .5s}
+#drawer.open .veil{opacity:1}
+#drawer .sheet{position:absolute;top:0;right:0;bottom:0;width:min(520px,100%);background:var(--ink);color:var(--bg);padding:calc(30px + env(safe-area-inset-top,0px)) 5vw 40px;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .6s cubic-bezier(.7,0,.2,1);overflow-y:auto}
+#drawer.open .sheet{transform:none}
+#drawer .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6vh}
+#drawer .top button{background:none;border:0;color:inherit;font:300 38px var(--serif);cursor:pointer}
+#drawer .big a{display:flex;align-items:baseline;gap:18px;font:italic 300 clamp(36px,6vw,58px)/1.25 var(--serif);border-bottom:1px solid rgba(128,128,128,.3);padding:6px 0;transition:padding .3s}
+#drawer .big a:hover{padding-left:14px}
+#drawer .big small{font:300 11px var(--sans);letter-spacing:.2em;opacity:.55}
+#drawer .sub{margin-top:auto;padding-top:30px;display:flex;flex-wrap:wrap;gap:10px 22px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;opacity:.75}
+/* upitnik */
+.quiz{display:grid;grid-template-columns:1fr 1.5fr;gap:6vw;align-items:start}
+.quiz .intro{position:sticky;top:90px}
+.quiz h2{font-size:clamp(38px,5.5vw,78px);margin:14px 0 24px}
+.quiz .intro p{color:var(--mute);max-width:360px}
+#qf{display:grid;grid-template-columns:1fr 1fr;gap:30px 26px}
+#qf .full{grid-column:1/-1}
+#qf label,#qf .lbl{display:block;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+#qf input,#qf select,#qf textarea{width:100%;background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--ink);font:300 18px var(--sans);padding:8px 0;border-radius:0;outline:none}
+#qf textarea{min-height:110px;resize:vertical;border:1px solid var(--line);padding:12px}
+#qf input:focus,#qf select:focus,#qf textarea:focus{border-color:var(--mute)}
+#qf select option{color:#111}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-block;border:1px solid var(--line);padding:9px 18px;font-size:14px;cursor:pointer;transition:.25s;text-transform:none;letter-spacing:.02em;color:var(--ink);margin:0}
+.chips input:checked+span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chips input:focus-visible+span{outline:2px solid var(--mute)}
+#love{display:none}#love.show{display:block}
+#qf button.btn{background:transparent;color:var(--ink);cursor:pointer;font-family:var(--sans)}
+#qf button.btn:hover{background:var(--ink);color:var(--bg)}
+#qmsg{color:var(--mute);font-size:14px;margin-top:14px}
+@media(max-width:760px){.quiz{grid-template-columns:1fr}.quiz .intro{position:relative;top:0}#qf{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="#pocetna">Ime Prezime</a>
+  <nav>
+    <a href="#radovi">Radovi</a><a href="#o-meni">O meni</a><a href="#galerija">Galerija</a><a href="#suradnja">Suradnja</a><a href="#upitnik">Upitnik</a><a href="#kontakt">Kontakt</a>
+  </nav>
+  <button class="menu-btn" id="mb" aria-label="Otvori izbornik">Izbornik</button>
+</header>
+
+<div class="hero" id="pocetna">
+  <div class="panel"></div><div class="panel"></div><div class="panel"></div>
+  <div class="hero-title">
+    <span class="eyebrow" style="color:#fff">Fotografkinja · Slavonija i šire</span>
+    <h1>Svjetlo, trenuci,<br>prave priče.</h1>
+    <p>Fotografiram vjenčanja, obitelji, brendove i događaje – iskreno, tiho i s puno pažnje za detalj.</p>
+  </div>
+  <div class="scroll-cue">POMAKNI DOLJE</div>
+</div>
+
+<section id="radovi">
+  <div class="sec-head rv">
+    <div><span class="eyebrow">01 — Radovi</span><h2>Što fotografiram</h2></div>
+    <p>Odaberi područje i uđi izravno u galeriju tog rada.</p>
+  </div>
+  <div class="works">
+    <a class="work w1 rv" href="#galerija-vjencanja"><div class="ph" data-ph="1"></div><small>Galerija →</small><span>Vjenčanja i zaruke</span></a>
+    <a class="work w2 rv" href="#galerija-obitelj"><div class="ph" data-ph="2"></div><small>Galerija →</small><span>Obitelj</span></a>
+    <a class="work w3 rv" href="#galerija-brendovi"><div class="ph" data-ph="3"></div><small>Galerija →</small><span>Brendovi</span></a>
+    <a class="work w4 rv" href="#galerija-eventi"><div class="ph" data-ph="4"></div><small>Galerija →</small><span>Eventi</span></a>
+  </div>
+</section>
+
+<div class="band"><h2 class="rv">Najljepše fotografije nastaju kad zaboraviš da te netko snima.</h2></div>
+
+<section id="o-meni">
+  <div class="about">
+    <div class="ph sticky" data-ph="5"></div>
+    <div class="rv">
+      <span class="eyebrow">02 — O meni</span>
+      <h2>Bok, ja sam Ime.</h2>
+      <p>Ovdje ide tvoja priča: kako je počelo, što te inspirira i zašto voliš fotografirati ljude. Tekst je lako zamijeniti – dovoljno je nekoliko rečenica koje zvuče kao ti.</p>
+      <p>Volim prirodno svjetlo, spontane trenutke i fotografije koje se gledaju i za dvadeset godina. Radim mirno, bez režije, uz puno razgovora.</p>
+      <div class="facts"><div><b>8+</b><span>godina iskustva</span></div><div><b>120</b><span>vjenčanja</span></div><div><b>60</b><span>brendova</span></div></div>
+      <a class="btn" href="#kontakt">Javi mi se</a>
+    </div>
+  </div>
+</section>
+
+<section id="suradnja">
+  <div class="sec-head rv">
+    <div><span class="eyebrow">03 — Istraži</span><h2>Sve na jednom mjestu</h2></div>
+    <p>Pregled onoga što te vjerojatno zanima prije nego što me kontaktiraš.</p>
+  </div>
+  <div class="links rv">
+    <a href="#cjenik"><em>Paketi</em><h3>Cjenik</h3><em>Pogledaj →</em></a>
+    <a href="#proces"><em>Korak po korak</em><h3>Kako surađujemo</h3><em>Pogledaj →</em></a>
+    <a href="#pitanja"><em>Odgovori</em><h3>Česta pitanja</h3><em>Pogledaj →</em></a>
+    <a href="#blog"><em>Savjeti</em><h3>Blog</h3><em>Pročitaj →</em></a>
+    <a href="#recenzije"><em>Dojmovi</em><h3>Recenzije</h3><em>Pročitaj →</em></a>
+  </div>
+</section>
+
+<a class="teaser" href="#galerija">
+  <div class="ph" data-ph="6" style="position:absolute"></div>
+  <div><span><span class="eyebrow" style="color:#fff">04 — Galerija</span><h2>Uđi u galeriju</h2><span class="btn">Otvori sve radove</span></span></div>
+</a>
+
+<section id="upitnik">
+  <div class="quiz">
+    <div class="intro rv">
+      <span class="eyebrow">05 — Upitnik</span>
+      <h2>Ispričaj mi svoju priču.</h2>
+      <p>Ispuni kratki upitnik kako bih te bolje upoznala prije prvog razgovora. Nema točnih ni krivih odgovora – piši onako kako osjećaš.</p>
+    </div>
+    <form id="qf" class="rv" novalidate>
+      <div><label for="q-ime">Ime</label><input id="q-ime" required autocomplete="given-name"></div>
+      <div><label for="q-prez">Prezime</label><input id="q-prez" required autocomplete="family-name"></div>
+      <div><label for="q-mail">E-mail</label><input id="q-mail" type="email" required autocomplete="email"></div>
+      <div><label for="q-tel">Telefon (neobavezno)</label><input id="q-tel" type="tel" autocomplete="tel"></div>
+      <div><label for="q-vrsta">Što fotografiramo?</label><select id="q-vrsta"><option value="">Odaberi…</option><option value="vjenčanje">Vjenčanje</option><option value="zaruke">Zaruke</option><option value="obitelj">Obitelj</option><option value="brend">Brend</option><option value="event">Event</option><option value="drugo">Nešto drugo</option></select></div>
+      <div><label for="q-dat">Okvirni datum</label><input id="q-dat" placeholder="npr. lipanj 2027."></div>
+      <div class="full"><label for="q-cuo">Kako ste čuli za mene?</label><select id="q-cuo"><option value="">Odaberi…</option><option>Instagram</option><option>Preporuka prijatelja ili obitelji</option><option>Google pretraga</option><option>Suradnja s drugim dobavljačima</option><option>Vidjela sam tvoj rad na događaju</option><option>Drugo</option></select></div>
+      <div class="full"><label for="q-bud">Okvirni budžet</label><select id="q-bud"><option value="">Odaberi…</option><option>do 300 €</option><option>300 – 600 €</option><option>600 – 1000 €</option><option>1000 – 2000 €</option><option>više od 2000 €</option><option>Nisam sigurna, trebam savjet</option></select></div>
+      <div class="full"><label for="q-oc">Kakva su vaša očekivanja?</label><textarea id="q-oc" placeholder="Što vam je najvažnije da dobijete od snimanja?"></textarea></div>
+      <div class="full"><label for="q-viz">Kakva je vaša vizija?</label><textarea id="q-viz" placeholder="Mjesto, atmosfera, boje, reference koje volite…"></textarea></div>
+      <div class="full"><span class="lbl">Kakav je vaš vajb? (možeš odabrati više)</span>
+        <div class="chips" id="vibe">
+          <label><input type="checkbox" value="Nježno i romantično"><span>Nježno i romantično</span></label>
+          <label><input type="checkbox" value="Opušteno i spontano"><span>Opušteno i spontano</span></label>
+          <label><input type="checkbox" value="Elegantno i klasično"><span>Elegantno i klasično</span></label>
+          <label><input type="checkbox" value="Editorijalno i hrabro"><span>Editorijalno i hrabro</span></label>
+          <label><input type="checkbox" value="Boho i priroda"><span>Boho i priroda</span></label>
+          <label><input type="checkbox" value="Zabavno i energično"><span>Zabavno i energično</span></label>
+        </div></div>
+      <div class="full" id="love"><label for="q-love">Vaš love story ♡</label><textarea id="q-love" placeholder="Kako ste se upoznali, što je bio prvi dojam, kako je došlo do zaruka…"></textarea></div>
+      <div class="full"><button type="submit" class="btn">Pošalji upitnik</button><div id="qmsg" role="status"></div></div>
+    </form>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="contact">
+    <div class="rv"><span class="eyebrow">05 — Kontakt</span><h2>Napravimo nešto lijepo.</h2></div>
+    <ul class="rv">
+      <li><span>E-mail</span><span>ime@primjer.hr</span></li>
+      <li><span>Telefon</span><span>+385 00 000 0000</span></li>
+      <li><span>Instagram</span><span>@tvojprofil</span></li>
+      <li><span>Lokacija</span><span>Hrvatska</span></li>
+    </ul>
+  </div>
+</section>
+<footer><span>© 2026 Ime Prezime Fotografija</span><span>Sva prava pridržana</span></footer>
+
+<div id="drawer" aria-hidden="true">
+  <div class="veil"></div>
+  <div class="sheet">
+    <div class="top"><span class="eyebrow" style="color:inherit;opacity:.6">Izbornik</span><button id="mx" aria-label="Zatvori izbornik">×</button></div>
+    <div class="big">
+      <a href="#pocetna"><small>01</small>Početna</a>
+      <a href="#radovi"><small>02</small>Radovi</a>
+      <a href="#o-meni"><small>03</small>O meni</a>
+      <a href="#galerija"><small>04</small>Galerija</a>
+      <a href="#suradnja"><small>05</small>Suradnja</a>
+      <a href="#upitnik"><small>06</small>Upitnik</a>
+      <a href="#kontakt"><small>07</small>Kontakt</a>
+    </div>
+    <div class="sub"><a href="#galerija-vjencanja">Vjenčanja</a><a href="#galerija-obitelj">Obitelj</a><a href="#galerija-brendovi">Brendovi</a><a href="#galerija-eventi">Eventi</a><a href="#cjenik">Cjenik</a><a href="#blog">Blog</a></div>
+  </div>
+</div>
+
+<div id="gal">
+  <div class="gtop">
+    <h2>Galerija</h2>
+    <div class="filters">
+      <a href="#galerija" data-f="sve">Sve</a><a href="#galerija-vjencanja" data-f="vjencanja">Vjenčanja i zaruke</a><a href="#galerija-obitelj" data-f="obitelj">Obitelj</a><a href="#galerija-brendovi" data-f="brendovi">Brendovi</a><a href="#galerija-eventi" data-f="eventi">Eventi</a>
+      <a href="#radovi">✕ Zatvori</a>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+<div id="lb"><button class="x" aria-label="Zatvori">×</button><button class="p" aria-label="Prethodna">‹</button><div class="ph"></div><button class="n" aria-label="Sljedeća">›</button></div>
+
+<script>
+(function(){
+  // Crno-bijeli rezervni prikazi dok ne zamijeniš pravim fotografijama
+  function grad(i){var a=(i*47)%360,l1=14+(i*13)%38,l2=48+(i*17)%40;
+    return 'linear-gradient('+a+'deg,hsl(0 0% '+l1+'%),hsl(0 0% '+l2+'%))';}
+  function setG(el,i){el.style.setProperty('--g',grad(i));}
+  document.querySelectorAll('[data-ph]').forEach(function(e){setG(e,+e.dataset.ph*3)});
+  // hero: tri okvira, fotografije se naizmjenično mijenjaju
+  document.querySelectorAll('.panel').forEach(function(p,pi){
+    for(var l=0;l<3;l++){var d=document.createElement('div');d.className='ph';setG(d,pi*5+l*2+1);
+      d.style.animationDelay=(-(l*3)-pi*1.5)+'s';p.appendChild(d);}
+  });
+  // galerija
+  var cats=['vjencanja','obitelj','brendovi','eventi'],items=[],ratios=[150,120,180,130,160,110,170,140];
+  cats.forEach(function(c,ci){for(var k=0;k<8;k++){items.push({c:c,h:ratios[(k+ci*3)%8],g:ci*9+k+2});}});
+  var grid=document.getElementById('grid'),gal=document.getElementById('gal'),cur=[],idx=0;
+  function render(f){
+    grid.innerHTML='';cur=items.filter(function(x){return f==='sve'||x.c===f});
+    cur.forEach(function(x,i){var d=document.createElement('div');d.className='ph';d.style.height=(x.h*1.9)+'px';setG(d,x.g);
+      d.onclick=function(){show(i)};grid.appendChild(d);});
+    document.querySelectorAll('.filters a[data-f]').forEach(function(a){a.classList.toggle('act',a.dataset.f===f)});
+  }
+  var lb=document.getElementById('lb');
+  function show(i){idx=(i+cur.length)%cur.length;setG(lb.querySelector('.ph'),cur[idx].g);lb.classList.add('open');}
+  lb.querySelector('.x').onclick=function(){lb.classList.remove('open')};
+  lb.querySelector('.p').onclick=function(){show(idx-1)};
+  lb.querySelector('.n').onclick=function(){show(idx+1)};
+  document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')lb.classList.remove('open');if(e.key==='ArrowLeft')show(idx-1);if(e.key==='ArrowRight')show(idx+1);});
+  function route(){
+    var h=location.hash.slice(1);
+    if(h.indexOf('galerija')===0){var f=h.split('-')[1]||'sve';if(cats.indexOf(f)<0)f='sve';render(f);gal.classList.add('open');gal.scrollTop=0;document.body.style.overflow='hidden';}
+    else{gal.classList.remove('open');lb.classList.remove('open');document.body.style.overflow='';}
+  }
+  window.addEventListener('hashchange',route);route();
+  // izbornik (slajd)
+  var dr=document.getElementById('drawer');
+  function menu(o){dr.classList.toggle('open',o);dr.setAttribute('aria-hidden',o?'false':'true');}
+  document.getElementById('mb').onclick=function(){menu(true)};
+  document.getElementById('mx').onclick=function(){menu(false)};
+  dr.querySelector('.veil').onclick=function(){menu(false)};
+  dr.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu(false)})});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')menu(false)});
+  // upitnik
+  var TO='ime@primjer.hr',qf=document.getElementById('qf'),vr=document.getElementById('q-vrsta'),love=document.getElementById('love');
+  vr.addEventListener('change',function(){love.classList.toggle('show',vr.value==='vjenčanje'||vr.value==='zaruke');});
+  function v(id){return document.getElementById(id).value.trim();}
+  qf.addEventListener('submit',function(e){
+    e.preventDefault();var msg=document.getElementById('qmsg');
+    if(!v('q-ime')||!v('q-prez')||!v('q-mail')){msg.textContent='Molim te upiši ime, prezime i e-mail.';return;}
+    var vibe=[].slice.call(document.querySelectorAll('#vibe input:checked')).map(function(i){return i.value}).join(', ');
+    var L=['Ime i prezime: '+v('q-ime')+' '+v('q-prez'),'E-mail: '+v('q-mail'),'Telefon: '+v('q-tel'),'Vrsta snimanja: '+v('q-vrsta'),'Okvirni datum: '+v('q-dat'),'Kako su čuli za mene: '+v('q-cuo'),'Budžet: '+v('q-bud'),'','Očekivanja:',v('q-oc'),'','Vizija:',v('q-viz'),'','Vajb: '+vibe];
+    if(love.classList.contains('show'))L.push('','Love story:',v('q-love'));
+    var url='mailto:'+TO+'?subject='+encodeURIComponent('Upitnik – '+v('q-ime')+' '+v('q-prez'))+'&body='+encodeURIComponent(L.join('\n'));
+    msg.textContent='Otvara se tvoj e-mail s ispunjenim odgovorima – samo pritisni pošalji. Hvala!';
+    location.href=url;
+  });
+  // pojavljivanje pri skrolanju
+  var rv=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}})},{threshold:.15});
+    rv.forEach(function(e){io.observe(e)});
+  }else{rv.forEach(function(e){e.classList.add('on')});}
+})();
+</script>
+</body>
+</html>
